@@ -1,2 +1,8 @@
 .idea
 vendor
+.phpunit.result.cache
+composer.lock
+tools/phpstan/*
+!tools/phpstan/composer.json
+tools/php-cs-fixer/*
+!tools/php-cs-fixer/composer.json

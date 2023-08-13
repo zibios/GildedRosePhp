@@ -4,27 +4,30 @@ use App\GildedRose;
 use App\Item;
 use PHPUnit\Framework\TestCase;
 
-class GildedRoseTest extends TestCase
+final class GildedRoseTest extends TestCase
 {
     /**
      * @dataProvider itemsProvider
-     * @param string $name
-     * @param int $sellIn
-     * @param int $quality
-     * @param int $expectedSellIn
-     * @param int $expectedQuality
      */
-    public function testUpdateQualityTest($name, $sellIn, $quality, $expectedSellIn, $expectedQuality): void
-    {
+    public function testUpdateQualityTest(
+        string $name,
+        int $sellIn,
+        int $quality,
+        int $expectedSellIn,
+        int $expectedQuality
+    ): void {
         $item = new Item($name, $sellIn, $quality);
 
         $gildedRose = new GildedRose();
         $gildedRose->updateQuality($item);
 
-        $this->assertEquals($expectedSellIn, $item->sell_in);
-        $this->assertEquals($expectedQuality, $item->quality);
+        $this->assertSame($expectedSellIn, $item->sellIn);
+        $this->assertSame($expectedQuality, $item->quality);
     }
 
+    /**
+     * @return array<string, array{string, int, int, int, int}>
+     */
     public function itemsProvider(): array
     {
         return [
@@ -47,6 +50,7 @@ class GildedRoseTest extends TestCase
             'Sulfuras after sell in date' => ['Sulfuras, Hand of Ragnaros', -1, 80, -1, 80],
             'Elixir of the Mongoose before sell in date' => ['Elixir of the Mongoose', 10, 10, 9, 9],
             'Elixir of the Mongoose sell in date' => ['Elixir of the Mongoose', 0, 10, -1, 8],
+            'Elixir of the Mongoose with zero quality' => ['Elixir of the Mongoose', 0, 0, -1, 0],
         ];
     }
 }
