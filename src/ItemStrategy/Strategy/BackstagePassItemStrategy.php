@@ -12,10 +12,10 @@ final class BackstagePassItemStrategy extends AbstractItemStrategy
     public function updateProperties(Item $item): void
     {
         $this->increaseQuality($item);
-        if ($this->isExpirationTimeBelowThreshold($item, self::DOUBLE_QUALITY_THRESHOLD)) {
+        if ($this->isExpirationTimeInThreshold($item, self::DOUBLE_QUALITY_THRESHOLD)) {
             $this->increaseQuality($item);
         }
-        if ($this->isExpirationTimeBelowThreshold($item, self::TRIPLE_QUALITY_THRESHOLD)) {
+        if ($this->isExpirationTimeInThreshold($item, self::TRIPLE_QUALITY_THRESHOLD)) {
             $this->increaseQuality($item);
         }
 
@@ -30,7 +30,7 @@ final class BackstagePassItemStrategy extends AbstractItemStrategy
         $item->quality = self::MIN_QUALITY;
     }
 
-    private function isExpirationTimeBelowThreshold(Item $item, int $timeThreshold): bool
+    private function isExpirationTimeInThreshold(Item $item, int $timeThreshold): bool
     {
         return $item->sellIn <= $timeThreshold;
     }

@@ -4,7 +4,7 @@ namespace App\ItemStrategy\Strategy;
 
 use App\Item;
 
-final class AgedBrieItemStrategy extends AbstractItemStrategy
+final class AgedItemStrategy extends AbstractItemStrategy
 {
     public function updateProperties(Item $item): void
     {
